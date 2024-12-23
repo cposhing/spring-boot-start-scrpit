@@ -10,7 +10,7 @@ set JAVA_EXE=java.exe
 %JAVA_EXE% -version >NUL 2>&1
 if "%ERRORLEVEL%" == "0" goto execute
 
-echo [´íÎó]: JAVA_HOME Î´¶¨Òå£¬»òÕßÔËĞĞÂ·¾¶ÖĞÎ´°üº¬java.exe³ÌĞò
+echo [é”™è¯¯]: JAVA_HOME æœªå®šä¹‰ï¼Œæˆ–è€…è¿è¡Œè·¯å¾„ä¸­æœªåŒ…å«java.exeç¨‹åº
 goto fail
 
 :findJavaFromJavaHome
@@ -18,7 +18,7 @@ set JAVA_HOME=%JAVA_HOME:"=%
 set JAVA_EXE=%JAVA_HOME%\bin\java.exe
 
 if exist "%JAVA_EXE%" goto execute
-echo [´íÎó]: JAVA_HOME ¶¨ÒåÔÚÒ»¸ö´íÎóµÄÂ·¾¶ÖĞ£º %JAVA_HOME%
+echo [é”™è¯¯]: JAVA_HOME å®šä¹‰åœ¨ä¸€ä¸ªé”™è¯¯çš„è·¯å¾„ä¸­ï¼š %JAVA_HOME%
 goto fail
 
 @rem ENV setting is ok
@@ -29,27 +29,29 @@ if "%DIRNAME%" == "" set DIRNAME=.
 set APP_HOME=%DIRNAME%
 for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
 
-::ÔËĞĞ²ÎÊıÉèÖÃ::
-@rem Ö¸¶¨ÈÕÖ¾ÅäÖÃ(ÒÔlogback.xmlÎªÀı)Î»ÖÃ(¿ÉÑ¡²ÎÊı)
+::è¿è¡Œå‚æ•°è®¾ç½®::
+@rem æŒ‡å®šæ—¥å¿—é…ç½®(ä»¥logback.xmlä¸ºä¾‹)ä½ç½®(å¯é€‰å‚æ•°)
 set LOG_CONFIG=-Dlogging.config=%APP_HOME%config\logback.xml
 
-@rem Ö¸¶¨application.propertiesÎ»ÖÃ(¿ÉÑ¡²ÎÊı)
+@rem æŒ‡å®šapplication.propertiesä½ç½®(å¯é€‰å‚æ•°)
 set PROP_CONFIG=-Dspring.config.location=%APP_HOME%config\application.properties
 
+@rem æŒ‡å®šæ˜¯å¦å¼€å¯ansiå½©è‰²æ—¥å¿—
+set ANSI_CONFIG=-Dspring.output.ansi.enabled=always
 
-@rem Ö¸¶¨·şÎñÃû³ÆºÍÊ±Çø(¿ÉÑ¡²ÎÊı)
+@rem æŒ‡å®šæœåŠ¡åç§°å’Œæ—¶åŒº(å¯é€‰å‚æ•°)
 set JAVA_OPTS_COMMON="-Dname=%APP_NAME%" "-Duser.timezone=Asia/Shanghai"
 
-@rem Ö¸¶¨JVM²ÎÊı(¿ÉÑ¡²ÎÊı)
+@rem æŒ‡å®šJVMå‚æ•°(å¯é€‰å‚æ•°)
 set JAVA_OPTS="-Xms4096m -Xms4096m -XX:NewSize=2048m -XX:MaxNewSize=2048m"
 
-@rem Ö¸¶¨pidÎÄ¼şÎ»ÖÃ(¿ÉÑ¡²ÎÊı) 
+@rem æŒ‡å®špidæ–‡ä»¶ä½ç½®(å¯é€‰å‚æ•°) 
 set PID_FILE=-Dspring.pid.file=%APP_HOME%application.pid
 
 @rem d file Encoding
 set D_FILE_ENCODING="-Dfile.encoding=UTF-8"
 
-@rem Ö¸¶¨jarÃû³Æ
+@rem æŒ‡å®šjaråç§°
 set EXEC_JAR=%APP_HOME%%APP_NAME%.jar
 
 "%JAVA_EXE%" %D_FILE_ENCODING%^
